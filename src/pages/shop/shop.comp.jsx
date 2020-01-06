@@ -16,8 +16,13 @@ export default class ShopPage extends React.Component {
     const { collections } = this.state;
     return (
       <div className="shop-page">
-        {collections.map(({ id, ...otherCollProps }) => (
-          <CollectionPreview key={id} {...otherCollProps} />
+        {collections.map(({ id, title, routeName, items }) => (
+          <CollectionPreview
+            key={id}
+            title={title}
+            items={items}
+            routeName={routeName}
+          />
         ))}
       </div>
     );
