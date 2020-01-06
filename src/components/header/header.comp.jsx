@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// auth
 import { auth } from '../../firebase/firebase.utils';
 
+// comp
+import Cart from '../cart/cart.comp';
+
+// style
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.style.scss';
 
@@ -29,6 +34,7 @@ export default function Header({ currentUser }) {
             SIGN-IN
           </Link>
         )}
+        <Cart currentUser={currentUser} />
       </div>
     </div>
   );
