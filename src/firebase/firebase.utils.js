@@ -21,9 +21,14 @@ export const firestore = firebase.firestore();
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
-  const userRef = firestore.doc(`users/${userAuth.id}`);
+  console.log('Auth', userAuth);
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  console.log('UserRef', userRef);
   const snapShot = await userRef.get();
+  console.log('UserRef.get()', snapShot);
 
+  // if user (uid) doesn't exist,  then create new
+  // by getting data from google's userAuth (object)
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createAt = new Date();
@@ -36,9 +41,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData
       });
     } catch (error) {
-      console.log('ERRRORRR CREATING USER', error.message);
+      console.log('ERRRORRR during CREATING USER', error.message);
     }
   }
+
+  // return userRef;
   return userRef;
 };
 

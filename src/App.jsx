@@ -9,22 +9,32 @@ import Header from './components/header/header.comp';
 import HomePage from './pages/homepage/homepage.comp';
 import ShopPage from './pages/shop/shop.comp';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.comp';
+
+// redux action
 import { setCurrentUser } from './redux/user/userAction';
 
-// google auth
+//  firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
+const mapStateToProps = ({ user }) => ({ currentUser: user.currentUser });
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUserAction: user => dispatch(setCurrentUser(user))
+});
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUserAction } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          setCurrentUser({
+          console.log(snapShot);
+          setCurrentUserAction({
             id: snapShot.id,
             ...snapShot.data()
           });
@@ -40,6 +50,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
         <Header />
@@ -50,7 +61,7 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
             }
           />
         </Switch>
@@ -58,11 +69,5 @@ class App extends React.Component {
     );
   }
 }
-
-const mapStateToProps = ({ user }) => ({ currentUser: user.currentUser });
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
