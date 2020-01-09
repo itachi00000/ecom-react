@@ -10,20 +10,20 @@ import './collection-item.style.scss';
 import { addItem } from '../../redux/cart/cart.action';
 
 const mapDispatchToProps = dispatch => ({
-  addItemAct: item => dispatch(addItem(item))
+  addItemRx: item => dispatch(addItem(item))
 });
 
-function CollectionItem({ item, addItemAct }) {
+function CollectionItem({ item, addItemRx }) {
   const { name, price, imageUrl } = item;
 
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
       <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
+        <span className="name">{name} - </span>
+        <span className="price">${price}</span>
       </div>
-      <CustomButton onClick={() => addItemAct(item)}>Add to Cart</CustomButton>
+      <CustomButton onClick={() => addItemRx(item)}>Add to Cart</CustomButton>
     </div>
   );
 }
