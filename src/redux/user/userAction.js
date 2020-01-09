@@ -1,6 +1,7 @@
 import { UserActionTypes } from './UserActionTypes';
 
-export default function setCurrentUser(user) {
+// eslint-disable-next-line import/prefer-default-export
+export function setCurrentUser(user) {
   return {
     type: UserActionTypes.SET_CURRENT_USER,
     payload: user

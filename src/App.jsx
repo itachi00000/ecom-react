@@ -32,7 +32,6 @@ class App extends React.Component {
       } else {
         setCurrentUser(userAuth);
       }
-      createUserProfileDocument(user);
     });
   }
 
@@ -41,8 +40,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
-
     return (
       <div>
         <Header />
@@ -68,4 +65,4 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

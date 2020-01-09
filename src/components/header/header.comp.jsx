@@ -12,6 +12,10 @@ import Cart from '../cart/cart.comp';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.style.scss';
 
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
 function Header({ currentUser }) {
   return (
     <div className="header">
@@ -40,9 +44,5 @@ function Header({ currentUser }) {
     </div>
   );
 }
-
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
-});
 
 export default connect(mapStateToProps)(Header);
