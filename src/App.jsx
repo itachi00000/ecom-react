@@ -11,22 +11,24 @@ import ShopPage from './pages/shop/shop.comp';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.comp';
 
 // redux action
-import { setCurrentUser } from './redux/user/userAction';
-
+import { setCurrentUser } from './redux/user/user.actions';
+// reselect
+import { selectCurrentUser } from './redux/user/user.selectors';
 //  firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import CheckoutPage from './pages/checkout/checkout.comp';
 
-const mapStateToProps = ({ user }) => ({ currentUser: user.currentUser });
+const mapStateToProps = state => ({ currentUserRx: selectCurrentUser(state) });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUserAction: user => dispatch(setCurrentUser(user))
+  setCurrentUserRx: user => dispatch(setCurrentUser(user))
 });
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUserAction } = this.props;
+    const { setCurrentUserRx } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -34,7 +36,7 @@ class App extends React.Component {
 
         userRef.onSnapshot(snapShot => {
           console.log(snapShot);
-          setCurrentUserAction({
+          setCurrentUserRx({
             id: snapShot.id,
             ...snapShot.data()
           });
@@ -50,18 +52,19 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
+    const { currentUserRx } = this.props;
     return (
       <div>
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
             render={() =>
-              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+              currentUserRx ? <Redirect to="/" /> : <SignInAndSignUp />
             }
           />
         </Switch>

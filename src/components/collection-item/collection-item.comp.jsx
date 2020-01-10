@@ -7,7 +7,7 @@ import CustomButton from '../custom-button/custom-button.comp';
 import './collection-item.style.scss';
 
 // action
-import { addItem } from '../../redux/cart/cart.action';
+import { addItem } from '../../redux/cart/cart.actions';
 
 const mapDispatchToProps = dispatch => ({
   addItemRx: item => dispatch(addItem(item))
