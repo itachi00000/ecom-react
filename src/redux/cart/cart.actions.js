@@ -12,3 +12,17 @@ export function addItem(item) {
     payload: item
   };
 }
+
+export function removeItem(item) {
+  return {
+    type: CartActionTypes.REMOVE_ITEM,
+    payload: item
+  };
+}
+
+export function clearItem(item) {
+  return {
+    type: CartActionTypes.CLEAR_ITEM,
+    payload: item
+  };
+}
