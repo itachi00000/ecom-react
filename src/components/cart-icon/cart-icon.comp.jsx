@@ -19,7 +19,12 @@ const mapDispatchToProps = dispatch => ({
 
 function CartIcon({ toggleCartHiddenRx, itemCountRx }) {
   return (
-    <div className="cart-icon" onClick={toggleCartHiddenRx}>
+    <div
+      role="button"
+      tabIndex="0"
+      className="cart-icon"
+      onClick={toggleCartHiddenRx}
+    >
       <ShoppingIcon className="shopping-icon" />
       <span className="item-count">{itemCountRx}</span>
     </div>

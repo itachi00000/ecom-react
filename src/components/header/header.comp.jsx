@@ -37,7 +37,12 @@ function Header({ currentUserRx, hiddenRx }) {
         </Link>
         {currentUserRx ? (
           // button ????
-          <div className="option" onClick={() => auth.signOut()}>
+          <div
+            role="link"
+            tabIndex="0"
+            className="option"
+            onClick={() => auth.signOut()}
+          >
             SIGN OUT
           </div>
         ) : (

@@ -23,6 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # my
+.env
 .prettierrc
 .eslintrc.json
 .vscode
+note.txt

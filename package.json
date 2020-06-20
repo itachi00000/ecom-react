@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "ecom",
   "version": "0.1.0",
   "homepage": "http://itachi00000.github.io/ecom-react",
   "private": true,
@@ -16,11 +16,13 @@
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.3.0",
+    "react-stripe-checkout": "2.6.3",
     "redux": "4.0.4",
     "redux-logger": "3.0.6",
     "redux-persist": "6.0.0",
     "reselect": "4.0.0",
-    "node-sass": "4.13.0",
+    "styled-components": "4.4.1",
+    "node-sass": "4.13.1",
     "firebase": "7.6.1"
   },
   "devDependencies": {

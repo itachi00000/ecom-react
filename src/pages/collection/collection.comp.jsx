@@ -10,6 +10,7 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 import { selectCollection } from '../../redux/shop/shop.selectors';
 
 // it use currying, so it can use its own props?
+// display collection based on params.collectionId
 const mapStateToProps = (state, ownProps) => ({
   collectionRx: selectCollection(ownProps.match.params.collectionId)(state)
 });
