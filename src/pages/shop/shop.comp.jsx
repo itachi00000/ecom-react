@@ -1,21 +1,36 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-// pages
-import CollectionPage from '../collection/collection.comp';
+// container
+import CollectionOverviewContainer from '../../components/collection-overview/collection-overview.container';
+import CollectionPageContainer from '../collection/collection.container';
 
-// comps.
-import CollectionOverview from '../../components/collection-overview/collection-overview.comp';
+class ShopPage extends React.Component {
+  componentDidMount() {}
 
-function ShopPage({ match }) {
-  // display overview OR (ex. '/shop')
-  // display specific collection based on params (ex. '/shop/hats')
-  return (
-    <div className="shop-page">
-      <Route exact path={match.path} component={CollectionOverview} />
-      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-    </div>
-  );
+  render() {
+    // display overview OR (ex. '/shop')
+    // display specific collection based on params (ex. '/shop/hats')
+    const { match } = this.props;
+
+    return (
+      <div className="shop-page">
+        <Route
+          exact
+          path={match.path}
+          component={CollectionOverviewContainer}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          component={CollectionPageContainer}
+        />
+      </div>
+    );
+  }
 }
 
 export default ShopPage;
+
+//
+// routeProps = history, match, etc.
+// does it includes comp-props??
