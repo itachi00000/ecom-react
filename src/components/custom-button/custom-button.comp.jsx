@@ -1,22 +1,13 @@
 import React from 'react';
 
-import './custom-button.style.scss';
+// styled-comp
+import { CustomButtonContainer } from './custom-button.style';
 
-export default function CustomButton({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}) {
+// import './custom-button.style.scss';
+
+export default function CustomButton({ children, ...props }) {
   return (
     // eslint-disable-next-line react/button-has-type
-    <button
-      // button or Submit??
-      className={`${inverted ? 'inverted' : ''}
-      ${isGoogleSignIn ? 'google-sign-in' : ''}  custom-button`}
-      {...otherProps}
-    >
-      {children}
-    </button>
+    <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
   );
 }
